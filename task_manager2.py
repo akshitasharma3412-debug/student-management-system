@@ -1,20 +1,12 @@
-class Task:
-    def __init__(self,title):
-        self.title=title
-        self.completed=False
-
-    def mark_completed(self):
-        self.completed=True
-
-    def update_title(self,new_title):
-        self.title=new_title
-        self.completed=False
-
+from task import Task
 class TaskManager:
     def __init__(self):
      self.tasks=[] 
 
     def add_task(self,title):
+        if not title.strip():
+           print("Tasks title cannot be empty!")
+           return
         task=Task(title)
         self.tasks.append(task)
         print("Task added successfully")
@@ -62,6 +54,9 @@ class TaskManager:
 
      if 1 <= task_number <= len(self.tasks):
         new_title = input("Enter new task title: ")
+        if not new_title.strip():
+           print("Task title cannot be empty!")
+           return
 
         task = self.tasks[task_number - 1]
         task.update_title(new_title)
