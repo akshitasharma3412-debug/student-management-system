@@ -43,3 +43,19 @@ python task_manager2.py
 ```
 
 *Note: Replace `task_manager2.py` with the actual filename containing your OOP version, if different.*
+## Testing
+
+The following test cases were used to check the basic functionality of the Student Task Manager.
+
+| Test Case | Expected Result |
+|---|---|
+| Add a new task | Task should be added successfully. |
+| View tasks | All available tasks should be displayed. |
+| Mark a task as completed | Task status should change to Completed. |
+| Update a task title | The task title should be updated successfully. |
+| Enter an invalid task number | An error message should be displayed. |
+| Enter a non-numeric task number | The application should handle the invalid input. |
+| Add an empty task title | The application should display a validation message. |
+| Exit the application | The application should terminate successfully. |
+
+*Note: Run each test case and update this section according to the actual results.*
