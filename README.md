@@ -76,3 +76,24 @@ student_management_system/
 - **task_manager.py:** Contains the basic function-based version of the Student Task Manager.
 - **task_manager2.py:** Contains the Object-Oriented Programming (OOP) version of the project.
 - **README.md:** Provides project information, features, technologies, and testing details.
+- ## Learning Outcomes
+
+Through this project, I practiced the following concepts:
+
+- Understanding Python classes and objects.
+- Creating and using methods.
+- Managing tasks using lists and objects.
+- Implementing conditional statements and loops.
+- Validating user input.
+- Handling errors using `try-except`.
+- Implementing task creation, viewing, completion, and updating features.
+- Using Git for version control.
+- Uploading and maintaining project files on GitHub.
+- Writing project documentation using Markdown.
+
+## Future Improvements
+
+- Store tasks permanently using a database.
+- Add task deletion functionality.
+- Develop a graphical user interface.
+- Build a web-based version of the application.
