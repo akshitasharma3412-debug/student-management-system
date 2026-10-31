@@ -59,3 +59,20 @@ The following test cases were used to check the basic functionality of the Stude
 | Exit the application | The application should terminate successfully. |
 
 *Note: Run each test case and update this section according to the actual results.*
+## Project Structure
+
+```text
+student_management_system/
+│
+├── main.py
+├── task_manager.py
+├── task_manager2.py
+└── README.md
+```
+
+### File Description
+
+- **main.py:** Entry point of the application, if used to start the program.
+- **task_manager.py:** Contains the basic function-based version of the Student Task Manager.
+- **task_manager2.py:** Contains the Object-Oriented Programming (OOP) version of the project.
+- **README.md:** Provides project information, features, technologies, and testing details.
