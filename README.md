@@ -97,3 +97,48 @@ Through this project, I practiced the following concepts:
 - Add task deletion functionality.
 - Develop a graphical user interface.
 - Build a web-based version of the application.
+
+
+## Phase 3 - REST API Development using FastAPI
+
+### Overview
+Converted the Student Task Manager command-line application into a REST API using FastAPI.
+
+### Technologies Used
+- Python
+- FastAPI
+- Uvicorn
+- Pydantic
+- Swagger UI
+
+### API Endpoints
+
+| HTTP Method | Endpoint | Description |
+|-------------|----------|-------------|
+| GET | /tasks | Retrieve all tasks |
+| GET | /tasks/{id} | Retrieve a specific task |
+| POST | /tasks | Create a new task |
+| PATCH | /tasks/{id} | Update an existing task |
+| DELETE | /tasks/{id} | Delete a task |
+
+### Testing
+All API endpoints were tested using FastAPI Swagger UI.
+
+### Storage
+Tasks are temporarily stored in an in-memory Python list.
+Data is reset when the server restarts.
+
+### How to Run
+
+1. Install dependencies:
+
+   python -m pip install fastapi uvicorn
+
+2. Start the server:
+
+   python -m uvicorn api:app --reload
+
+3. Open Swagger UI:
+
+   http://127.0.0.1:8000/docs
+
