@@ -142,3 +142,41 @@ Data is reset when the server restarts.
 
    http://127.0.0.1:8000/docs
 
+## Phase 4: Database Integration
+
+- Integrated SQLite database with FastAPI.
+- Created a tasks table with ID, title, and completion status.
+- Implemented database operations:
+  - INSERT – Add tasks
+  - SELECT – Retrieve tasks
+  - UPDATE – Update task details
+  - DELETE – Delete tasks
+- Implemented persistent storage.
+- Verified that tasks remain saved after restarting the server.
+
+## Phase 5: Validation and Testing
+
+- Implemented input validation using Pydantic.
+- Added task title validation.
+- Rejected empty and spaces-only task titles.
+- Added Boolean validation for task completion status.
+- Implemented HTTP 404 error handling for missing tasks.
+- Used Pytest for automated API testing.
+- Tested successful and unsuccessful API requests.
+
+### Testing
+
+Run automated tests using:
+
+```bash
+pytest -v
+```
+
+**Technologies Used:**
+- Python
+- FastAPI
+- SQLite
+- Pydantic
+- Pytest
+- HTTPX
+

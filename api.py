@@ -1,66 +1,83 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
+from fastapi import FastAPI,HTTPException
+from pydantic import BaseModel, Field, field_validator
+
+from db_connection import (
+    add_task as db_add_task,
+    get_tasks as db_get_tasks,
+    get_task as db_get_task,
+    update_task as db_update_task,
+    delete_task as db_delete_task
+)
 
 app=FastAPI()
 class TaskCreate(BaseModel):
-    title:str
+    title: str = Field(..., min_length=1)
+    @field_validator("title")
+    @classmethod
+    def validate_title(cls, value):
+        if not value.strip():
+            raise ValueError("Task title cannot contain only spaces")
+        return value.strip()
 
 class TaskUpdate(BaseModel):
-    title: str
+    title: str = Field(..., min_length=1)
+    completed:bool=False
+    @field_validator("title")
+    @classmethod
+    def validate_title(cls, value):
+        if not value.strip():
+            raise ValueError("Task title cannot contain only spaces")
+        return value.strip()
 
 @app.get("/")
 def home():
     return{"message":"Welcome to Student Task Manager API"}
 
-tasks = []
-
 @app.get("/tasks")
-def get_tasks():
-    return tasks
+def read_tasks():
+    return db_get_tasks()
 
 @app.post("/tasks")
 def create_task(task: TaskCreate):
-
-    new_task = {
-        "id": len(tasks) + 1,
-        "title": task.title,
-        "completed": False
-    }
-
-    tasks.append(new_task)
-
-    return new_task
+    task_id = db_add_task(task.title)
+    return db_get_task(task_id)
 
 @app.get("/tasks/{task_id}")
-def get_task(task_id: int):
+def read_task(task_id: int):
+    task = db_get_task(task_id)
 
-    for task in tasks:
-        if task["id"] == task_id:
-            return task
+    if task is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Task not found"
+        )
 
-    return {"message": "Task not found"}
-
+    return task
 
 @app.patch("/tasks/{task_id}")
-def update_task(task_id: int, task: TaskUpdate):
-
-    for existing_task in tasks:
-        if existing_task["id"] == task_id:
-            existing_task["title"] = task.title
-            return existing_task
-
-    return {"message": "Task not found"}
-
+def edit_task(task_id: int, task: TaskUpdate):
+    updated = db_update_task(
+        task_id,
+        task.title,
+        task.completed
+    )
+    if not updated:
+        raise HTTPException(
+            status_code=404,
+            detail="Task not found"
+        )
+    return db_get_task(task_id)
 
 @app.delete("/tasks/{task_id}")
-def delete_task(task_id: int):
+def remove_task(task_id: int):
+    deleted = db_delete_task(task_id)
 
-    for task in tasks:
-        if task["id"] == task_id:
-            tasks.remove(task)
-            return {"message": "Task deleted successfully"}
+    if not deleted:
+        raise HTTPException(
+        status_code=404,
+        detail="Task not found")
 
-    return {"message": "Task not found"}
+    return {"message": "Task deleted successfully"}
 
 
 
